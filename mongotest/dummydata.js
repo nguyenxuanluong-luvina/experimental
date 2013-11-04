@@ -1,5 +1,5 @@
-// var wddb = db.getSisterDB("wiperdog");
-var wddb = db.getSisterDB("wiperdog_test");
+var wddb = db.getSisterDB("wiperdog");
+// var wddb = db.getSisterDB("wiperdog_test");
 var mysqliid = "localhost-@MYSQL-information_schema";
 var pgsqliid = "localhost-@PGSQL-postgres";
 var mssqliid = "localhost-@MSSQL";
@@ -56,7 +56,9 @@ for (var i in cols) {
   } else if (cols[i].indexOf("SQL_Server") >= 0) {
     colname = cols[i] + "." + mssqliid;
   }
-  wddb[colname].insert(dummydata);
+  if (wddb[colname].count() == 0) {
+    wddb[colname].insert(dummydata);
 //   wddb[cols[i]].drop();
+  }
 }
 
