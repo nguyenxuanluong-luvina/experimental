@@ -1,5 +1,5 @@
 -- sample 2
-SELECT TOP 100
+SELECT -- TOP 100
     objID, ra ,dec 	-- Get the unique object ID and coordinates
 FROM
     PhotoPrimary		-- From the table containing photometric data for unique objects

@@ -1,4 +1,4 @@
-SELECT TOP 100
+SELECT -- TOP 100
     sp.objID, 
     sp.ra, 
     sp.dec, 

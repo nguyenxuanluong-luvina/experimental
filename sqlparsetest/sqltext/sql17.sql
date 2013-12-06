@@ -1,4 +1,5 @@
-SELECT TOP 10 fld.run, fld.avg_sky_muJy, fld.runarea AS area, ISNULL(fp.nfirstmatch,0)
+SELECT -- TOP 10
+ fld.run, fld.avg_sky_muJy, fld.runarea AS area, ISNULL(fp.nfirstmatch,0)
 FROM (
 --first part: for each run, get total area and average sky brightness
     SELECT run, sum(primaryArea) AS runarea, 

@@ -1,4 +1,5 @@
-SELECT TOP 10 u,g,r,i,z,ra,dec, flags_r
+SELECT -- TOP 10
+ u,g,r,i,z,ra,dec, flags_r
 FROM Star
 WHERE
     ra BETWEEN 180 and 181 AND dec BETWEEN -0.5 and 0.5 

@@ -1,4 +1,4 @@
-SELECT TOP 10
+SELECT -- TOP 10
     obj.run, obj.camCol, str(obj.field, 3) as field, 
     str(obj.rowc, 6, 1) as rowc, str(obj.colc, 6, 1) as colc, 
     str(dbo.fObj(obj.objId), 4) as id, 

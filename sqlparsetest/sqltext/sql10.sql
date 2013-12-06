@@ -1,4 +1,4 @@
-SELECT TOP 1000
+SELECT -- TOP 1000
     objID, 
     ra, 
     dec, 

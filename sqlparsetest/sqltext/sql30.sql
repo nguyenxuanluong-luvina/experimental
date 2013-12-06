@@ -1,4 +1,5 @@
-SELECT TOP 100 run,
+SELECT -- TOP 100
+ run,
     camCol, 
     rerun, 
     field, 

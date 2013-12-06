@@ -1,0 +1,5 @@
+in mongo sh
+
+db[ 'sqltext_parsed' ].find({"statement.contents.from.joins.join_type":"INNER"})
+db[ 'sqltext_parsed' ].find({"statement.contents.from.targets.expr.select": { $exists : true } })
+

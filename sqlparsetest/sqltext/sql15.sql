@@ -1,4 +1,4 @@
-SELECT (htmID / power(2,24)) as htm_8 ,
+SELECT div(htmID / power(2,24)) as htm_8 ,
     -- group by 8-deep HTMID (rshift HTM by 12) 
     avg(ra) as ra, 
     avg(dec) as [dec], 

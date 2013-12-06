@@ -1,4 +1,4 @@
-SELECT TOP 10
+SELECT -- TOP 10
     objID, ra, dec, 
     sqrt( power(rowv,2) + power(colv, 2) ) as velocity 
 FROM PhotoObj

@@ -1,4 +1,4 @@
-SELECT TOP 100
+SELECT -- TOP 100
     r.run, 
     r.rerun, 
     f.camCol, 

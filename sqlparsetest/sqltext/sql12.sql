@@ -1,4 +1,5 @@
-SELECT TOP 10 P.ObjID 	-- distinct cases
+SELECT -- TOP 10
+ P.ObjID 	-- distinct cases
 FROM PhotoPrimary AS P 	-- P is the primary object
     JOIN Neighbors AS N ON P.ObjID = N.ObjID 	-- N is the neighbor link
     JOIN PhotoPrimary AS L ON L.ObjID = N.NeighborObjID 
