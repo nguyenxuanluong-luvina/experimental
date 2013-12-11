@@ -53,7 +53,8 @@ function find_recursive(doc, key, value, comOperator) {
         }
     }
 }
-// Parameter : key , value and comparision operator passing to search function
+/* Usage example :
+//Parameter : key , value and comparision operator passing to search function
 var key = "table_name"
 var value = "SpecObjAll"
 var compOperator = "="
@@ -64,4 +65,5 @@ db['sqltext_parsed_test'].find().forEach( function( doc){
  print("-------------------------")
  }
 });
+*/
 
