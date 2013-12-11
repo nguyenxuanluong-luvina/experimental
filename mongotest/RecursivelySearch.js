@@ -1,39 +1,34 @@
+//Define functions to compare key and value
+var eq = function(doc,key,value) { if (doc[key] === value) return true; else return false }
+var not_eq = function(doc,key,value) { if (doc[key] !== value) return true; else  return false }
+var gt = function(doc,key,value) { if (doc[key] > value) return true; else return false }
+var lt = function(doc,key,value) { if (doc[key] < value) return true; else return false }
+var gt_eq = function(doc,key,value) { if (doc[key] >= value) return true; else return false }
+var lt_eq = function(doc,key,value) { if (doc[key] <= value) return true; else return false }
+//Function to recusive search 
 function find_recursive(doc, key, value, comOperator) {
     for (var attr in doc) {
-        if (doc[key] != "undefined" && comOperator != 'undefined' && comOperator !== "") {
-            switch (comOperator.trim()) {
-            case "=":
-                if (doc[key] == value) {
-                    return true;
-                }
-                break;
-            case "!=":
-                if (doc[key] !== value) {
-                    return true;
-                }
-                break;
-            case ">":
-                if (doc[key] > value) {
-                    return true;
-                }
-            case ">=":
-                if (doc[key] >= value) {
-                    return true;
-                }
-                break;
-            case "<":
-                if (doc[key] < value) {
-                    return true;
-                }
-                break;
-            case "<=":
-                if (doc[key] <= value) {
-                    return true;
-                }
-                break;
-            default:
-                print("Incorrect comparison operator")
+        if ((typeof doc[key] != "undefined") && (typeof comOperator != "undefined" ) && comOperator !== "") {
+            if(comOperator.trim() == "="){
+                return eq(doc,key,value)
+            }
+            if(comOperator.trim() == "!="){
+                return not_eq(doc,key,value)
+            }
+            if(comOperator.trim() == ">"){
+                return gt.call(doc,key,value)
+            }
 
+            if(comOperator.trim() == ">="){
+                return gt_eq(doc,key,value)
+            }
+
+            if(comOperator.trim() == "<"){
+                return lt(doc,key,value)
+            }
+
+            if(comOperator.trim() == "<="){
+                return lt_eq(doc,key,value)
             }
         }
         if (doc[attr] !== null && typeof (doc[attr]) == "object") {
@@ -53,10 +48,10 @@ function find_recursive(doc, key, value, comOperator) {
         }
     }
 }
-/* Usage example :
-//Parameter : key , value and comparision operator passing to search function
-var key = "table_name"
-var value = "SpecObjAll"
+/*
+// Parameter : key , value and comparision operator passing to search function
+var key = "join_type"
+var value = "INNER"
 var compOperator = "="
 
 db['sqltext_parsed_test'].find().forEach( function( doc){
@@ -64,6 +59,5 @@ db['sqltext_parsed_test'].find().forEach( function( doc){
  printjson(doc.statement.sql)
  print("-------------------------")
  }
-});
-*/
+});*/
 
