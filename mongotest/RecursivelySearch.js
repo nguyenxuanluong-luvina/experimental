@@ -17,7 +17,7 @@ function find_recursive(doc, key, value, comOperator) {
                     return true;
                 }
             case ">=":
-                if (doc[key] !== value) {
+                if (doc[key] >= value) {
                     return true;
                 }
                 break;
@@ -27,7 +27,7 @@ function find_recursive(doc, key, value, comOperator) {
                 }
                 break;
             case "<=":
-                if (doc[key] !== value) {
+                if (doc[key] <= value) {
                     return true;
                 }
                 break;
