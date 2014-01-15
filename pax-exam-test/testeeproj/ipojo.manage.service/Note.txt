@@ -1,0 +1,54 @@
+Here is demo for implementation functionality of ManageService OSGi
+ManageService in OSGi is an service used by ConfigurationAdmin to change the property of service's instance  at runtime
+So,in this demo example ,I've been used ipojo and ConfigurationAdmin to configure service instance 
+if anything wrong or misunderstand ,please correct me .
+ - About ipojo.manage.service source code : I write some super simple classes ,it's task is simulate an items seller.
+ Fisrt ,this seller is initialize with a stock quantity, and the custumer buy an item ,the stock quantity is descrease by 1
+ When the stock is empty (quantity = 0) .It is automatically filled by the quantity store in configuration file (I've fixed the file place at C:\ipojo.conf in source code)
+ - To using ConfigurationAdmin with ipojo ,we need create an instance and provide a pid ,this pid will be an indentifier
+ to mapping with instance configuration stored in ConfigurationAdmin.
+ This will be done by place a property with name "managed.service.pid" and value is some string unique or using instance's 
+ name when declare in XML metadata (ipojo.manage.service\metadata.xml) to create an instance (in this example, instance's pid is "ItemsProviderInstancePid")
+	
+ <ipojo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="org.apache.felix.ipojo http://felix.apache.org/ipojo/schemas/CURRENT/core.xsd"
+	xmlns="org.apache.felix.ipojo">
+	<component classname="com.insight_tec.ipojo.ItemsProvider"
+		immediate="true" architecture="true" name="ItemsProviderComponent">
+		<requires field="pm"/>
+		<callback transition="invalidate" method="stop" />
+		<callback transition="validate" method="start" />
+		<properties updated="updated">
+			<property field="stock" name="quantity" method="fillStock" type="int" />
+		</properties>
+	</component>
+	<instance component="ItemsProviderComponent" name="ItemsProviderInstance" >
+		<property name="managed.service.pid" value="ItemsProviderInstancePid"/>
+	</instance>
+</ipojo>
+First , we tell iPOJO that we have a component wit a specifice classname ,in this component ,we require the ConfigurationAdmin service ( the elements <requires field="pm"/> declare this,"pm" is the ConfigurationAdmin type )
+and two callback function manage the lifecycle of component instance
+The "stock" propery in:
+		<properties updated="updated">
+			<property field="stock" name="quantity" method="fillStock" type="int" />
+		</properties>
+is a field in ItemsProvider class, it represent for quantity of items and change (descrease by 1) when the custumer buy an item
+When the "stock" is empty, we need to fill it up by using method "fillStock" ,and this method require an parameter (type int)
+The attribute name="quantity" is the key of the configuration store in ConfigurationAdmin (ex: quantity=10) whose the value is filled stock up
+The "updated" attribute indicate that when the stock recofiguration completed,it will be using "updated" function to notified
+So,to indicate what instance will be configure ,the configuration file (C:\ipojo.conf) need some information about service factory pid and service pid:
+service.factoryPid=com.insight_tec.ipojo.ItemsProvider
+service.pid=ItemsProviderInstancePid
+quantity=10
+As you see ,the factoryPid is class name 
+of the service and service pid is the pid of instance (declare in XML)
+ - To run this example ,you need :
+	 - Maven with ipojo plugin version >= 1.8
+	 - Felix with ConfigurationAdmin bundle >=  1.8 ( I'm using org.apache.felix.configadmin-1.8.0.jar) , 
+	 ipojo bundle > 1.8 ( I'm using org.apache.felix.ipojo-1.8.4.jar),ipojo arch command utility ( org.apache.felix.ipojo.arch-1.6.0.jar)
+ - Run :
+    + start felix with requirement bundles
+	+ start bundle builded from ipojo.manage.service source
+    + At First run ,the instance of "ItemsProvider" component created,it initialize the "stock" value with INIT_STOCK = 5 ,every time the cusmtomer buy an item ,the "stock" is
+	descrease by 1 ( a message show up like : "[Info]-Custumer buy an item.Stock remain : 3"),when the stock empty (stock=0),it refilled up by the quantity in configuration file(C:\ipojo.conf).When the configuration complete ,a notified
+	message show up ("[Notified]-Stock updated !")

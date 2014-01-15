@@ -1,0 +1,31 @@
+This is simple demo about ServiceListener using iPOJO ,it simply show when the service is registerd or unregisted ,about service update ,i think that it
+same as configuration update in ManageService(May be I misunderstand) ,please see the updated function in ipojo.manage.service\Note.txt 
+When the service registered , we need a callback function to show that the service registered ,this declare in "post-unregistration" attribute of "provides" element
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ipojo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="org.apache.felix.ipojo http://felix.apache.org/ipojo/schemas/CURRENT/core.xsd"
+	xmlns="org.apache.felix.ipojo">
+	<component classname="com.insight_tec.ipojo.service.listener.impl.HelloServiceImpl"
+		name="HelloServiceImplComponent" >
+		<callback transition="validate" method="start" />
+		<callback transition="invalidate" method="stop" />							
+		<provides post-unregistration="unregistered" post-registration="registered" />
+	</component>
+	<instance component="HelloServiceImplComponent" name="HelloServiceImplInstance" />
+</ipojo>
+
+Certainly ,we need create an instance of service component to see the registered and unregistered of instance 
+When the instance create ,the demo will be show the list of service registered 
+[ServiceListener] - Service registered: [com.insight_tec.ipojo.service.listener.ServiceListener, com.insight_tec.ipojo.service.listener.HelloService]
+and when stop this demo bundle ,it will be :
+	[ServiceListener] - Service unregistered: [com.insight_tec.ipojo.service.listener.ServiceListener, com.insight_tec.ipojo.service.listener.HelloService]
+
+If the <provides /> element indicate seperate the service inteface provide like
+		<provides specifications="com.insight_tec.ipojo.service.listener.ServiceListener" post-unregistration="unregistered" post-registration="registered" />
+		<provides specifications="com.insight_tec.ipojo.service.listener.HelloService" post-unregistration="unregistered" post-registration="registered" />
+
+The message respectively will be:
+
+	[ServiceListener] - Service registered: [com.insight_tec.ipojo.service.listener.ServiceListener]
+	[ServiceListener] - Service registered: [com.insight_tec.ipojo.service.listener.HelloService]

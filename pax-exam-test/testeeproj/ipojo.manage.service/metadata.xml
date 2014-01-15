@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ipojo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="org.apache.felix.ipojo http://felix.apache.org/ipojo/schemas/CURRENT/core.xsd"
+	xmlns="org.apache.felix.ipojo">
+
+	<component classname="com.insight_tec.ipojo.ItemsProvider"
+		immediate="true" architecture="true" name="ItemsProviderComponent">
+		<requires field="pm"/>
+		<callback transition="invalidate" method="stop" />
+		<callback transition="validate" method="start" />
+		<properties updated="updated">
+			<property field="stock" name="quantity" method="fillStock" type="int" />
+		</properties>
+	</component>
+	<instance component="ItemsProviderComponent" name="ItemsProviderInstance" >
+		<property name="managed.service.pid" value="ItemsProviderInstancePid"/>
+	</instance>
+</ipojo>

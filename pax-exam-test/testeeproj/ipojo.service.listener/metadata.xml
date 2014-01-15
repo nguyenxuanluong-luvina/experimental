@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.insight_tec.ipojo.service.listener 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="org.apache.felix.ipojo http://felix.apache.org/com.insight_tec.ipojo.service.listener/schemas/CURRENT/core.xsd" 
+    xmlns="org.apache.felix.ipojo">
+      
+  <component classname="com.insight_tec.ipojo.service.listener.IPOJOListener" name="ServListenerComponent">
+    <provides />
+  </component>
+  
+  <instance component="ServListenerComponent" name="ServListenerInstance"  />
+</com.insight_tec.ipojo.service.listener>
