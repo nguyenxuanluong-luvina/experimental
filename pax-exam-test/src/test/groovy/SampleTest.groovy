@@ -69,12 +69,12 @@ public class SampleTest {
     @Configuration
     public Option[] config() {
         return options(
+			// Pax-exam make this test code into OSGi bundle at runtime, so 
+			// we need "groovy-all" bundle to use this groovy test code.
             mavenBundle("org.codehaus.groovy", "groovy-all", "2.2.1"),
             mavenBundle("org.apache.felix", "org.apache.felix.ipojo", "1.8.6"),
-            bundle("file:/home/kurohara/Downloads/hello.client/target/hello.client-1.0.jar"),
-            bundle("file:/home/kurohara/Downloads/hello.service/target/hello.service-1.0.jar"),
-            bundle("file:/home/kurohara/Downloads/hello.impl/target/hello.impl-1.0.jar") 
- ,
+			mavenBundle("com.insight_tec", "ipojo.manage.service", "1.0"),
+			mavenBundle("com.insight_tec", "ipojo.service.listener", "1.0"),
             junitBundles()
             );
     }
