@@ -19,3 +19,6 @@ def element = driver.findElement(By.name("q"))
 element.sendKeys("selenium")
 element.submit()
 
+element.sendKeys("sublime")
+element.submit()
+
