@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Export-Package: org.wiperdog.sample.managedservice;version="0.0.1.SNAP
+ SHOT"
+Built-By: maixuanthanh
+Tool: Bnd-0.0.357
+Bundle-Name: org.wiperdog.sample.managedservice
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.7.0_15
+Bundle-Version: 0.0.1.SNAPSHOT
+Bnd-LastModified: 1392196802890
+Bundle-ManifestVersion: 2
+Bundle-Description: parent pom for building wiperdog artifacts.
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Import-Package: org.wiperdog.sample.managedservice;version="0.0"
+Bundle-SymbolicName: org.wiperdog.sample.managedservice
+

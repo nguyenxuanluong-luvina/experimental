@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ipojo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="org.apache.felix.ipojo http://felix.apache.org/ipojo/schemas/CURRENT/core.xsd"
+	xmlns="org.apache.felix.ipojo">
+
+	<component classname="org.wiperdog.sample.managedservice.internal.SampleService" immediate="true">
+		<provides />
+		<properties updated="updated">
+			<property method="updated" type="string" />
+		</properties>
+	</component>
+	<instance component="org.wiperdog.sample.managedservice.internal.SampleService" name="TestFileInstallServicePid1" >
+		<property name="managed.service.pid" value="TestFileInstallServicePid11111"/>
+		<!-- Need the properties file named:  TestFileInstallServicePid11111.cfg for FileInstall-->
+	</instance>
+	<instance component="org.wiperdog.sample.managedservice.internal.SampleService" name="TestFileInstallServicePid2" >
+		<property name="managed.service.pid" value="TestFileInstallServicePid22222"/>
+		<!-- Need the properties file named:  TestFileInstallServicePid22222.cfg for FileInstall -->
+	</instance>
+</ipojo>
