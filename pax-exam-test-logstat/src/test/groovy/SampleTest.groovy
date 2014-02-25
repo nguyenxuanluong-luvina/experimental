@@ -1340,7 +1340,7 @@ public class SampleTest {
 
 			input_conf.put("input_type", "eventlog");
 			input_conf.put("event_log_type", "Application");
-			input_conf.put("from_time_generated", "2014-02-23");
+			input_conf.put("from_time_generated", "2014-02-33");
 
 			conf.put("input",input_conf);
 			conf.put("output",output_conf);
