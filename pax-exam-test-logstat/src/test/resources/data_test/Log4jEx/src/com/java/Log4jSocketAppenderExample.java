@@ -15,8 +15,7 @@ public class Log4jSocketAppenderExample {
 
 			// These logs will be sent to socket server as configured in
 			logger.error("Log4j error message!!");
-//			logger.debug("Log4j debug message!!");
-//			logger.warn("Log4j warn message!!");
+			logger.debug("Log4j debug message!!");
 			Log4jSocketAppenderExample obj = new Log4jSocketAppenderExample();
 			obj.testFunction();
 			System.out.println(i++);

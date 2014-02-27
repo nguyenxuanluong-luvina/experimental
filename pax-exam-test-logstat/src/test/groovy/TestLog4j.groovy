@@ -101,6 +101,7 @@ public class TestLog4j {
 		// result data
 		result = readFileOutput(wd + "/output.log");
 		assertTrue(result.contains('"message"=>"Log4j error message!!"'))
+		assertTrue(result.contains('"message"=>"Log4j debug message!!"'))
 		Thread.sleep(3000)
     }
 	

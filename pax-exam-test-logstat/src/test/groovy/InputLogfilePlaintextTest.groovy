@@ -94,7 +94,7 @@ public class InputLogfilePlaintextTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByLine0.output"
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByLine0() {
 		try{
 
@@ -124,7 +124,7 @@ public class InputLogfilePlaintextTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByLine1.output"
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByLine1() {
 		try{
 
@@ -153,7 +153,7 @@ public class InputLogfilePlaintextTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByLine2.output"
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByLine2() {
 		try{
 
@@ -182,7 +182,7 @@ public class InputLogfilePlaintextTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByLine3.output"
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByLine3() {
 		try{
 
@@ -211,7 +211,7 @@ public class InputLogfilePlaintextTest {
 	 * Expected : A error message println out:  "[Logstat]  : 'start_file_name' parameter must be required !"
 	 * No output generated 
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByLine4() {
 		try{
 			input_conf.put("path", logs_test_dir);
@@ -240,7 +240,7 @@ public class InputLogfilePlaintextTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByLine5.output"
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByLine5() {
 		try{
 
@@ -273,7 +273,7 @@ public class InputLogfilePlaintextTest {
 	 * The date in each record is >= 2014-02-05
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByDate0.output"
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByDate0() {
 		try{
 
@@ -305,7 +305,7 @@ public class InputLogfilePlaintextTest {
 	 * The date in each record is <= 2014-02-05
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByDate1.output"
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByDate1() {
 		try{
 
@@ -336,7 +336,7 @@ public class InputLogfilePlaintextTest {
 	 * The date in each record is >= 2014-02-05
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByDate2.output"
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByDate2() {
 		try{
 
@@ -365,7 +365,7 @@ public class InputLogfilePlaintextTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByDate3.output"
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByDate3() {
 		try{
 
@@ -393,7 +393,7 @@ public class InputLogfilePlaintextTest {
 	 * Expected : A error message println out:  "[Logstat]  : 'start_file_name' parameter must be required !"
 	 * No output generated
 	 */
-	//@Test
+	@Test
 	public void testPlainTextByDate4() {
 		try{
 

@@ -113,7 +113,7 @@ public class InputEventlogTest {
 	 *            the evemt logs has the time generated >= @from_time_generate params	 *            
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog0.output
 	 */
-	//@Test
+	@Test
 	public void testEventlog0() {
 		try{
 			def from_time_generated = "2014-02-26"
@@ -164,7 +164,7 @@ public class InputEventlogTest {
 	 * {"source_name"=>"LOGSTAT", "type"=>[event_type], "time"=>[the_time_logs_generated], "message"=>[the_log_message]}
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog2.output
 	 */
-	//@Test
+	@Test
 	public void testEventlog2() {
 		try{
 			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog2.output")
@@ -188,7 +188,7 @@ public class InputEventlogTest {
 	 * {"source_name"=>"LOGSTAT", "type"=>"ERROR", "time"=>[the_time_logs_generated], "message"=>[the_log_message]}
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog3.output
 	 */
-	//@Test
+	@Test
 	public void testEventlog3() {
 		try{
 			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog3.output")

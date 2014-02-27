@@ -94,7 +94,7 @@ public class InputLogfileCSVTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine0.output"
 	 */
-	//@Test
+	@Test
 	public void testCSVByLine0() {
 		try{
 
@@ -124,7 +124,7 @@ public class InputLogfileCSVTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine1.output"
 	 */
-	//@Test
+	@Test
 	public void testCSVByLine1() {
 		try{
 
@@ -153,7 +153,7 @@ public class InputLogfileCSVTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine2.output"
 	 */
-	//@Test
+	@Test
 	public void testCSVByLine2() {
 		try{
 
@@ -182,7 +182,7 @@ public class InputLogfileCSVTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine3.output"
 	 */
-	//@Test
+	@Test
 	public void testCSVByLine3() {
 		try{
 
@@ -211,7 +211,7 @@ public class InputLogfileCSVTest {
 	 * Expected : A error message println out:  "[Logstat]  : 'start_file_name' parameter must be required !"
 	 * No output generated 
 	 */
-	//@Test
+	@Test
 	public void testCSVByLine4() {
 		try{
 			input_conf.put("path", logs_test_dir);
@@ -240,7 +240,7 @@ public class InputLogfileCSVTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine5.output"
 	 */
-	//@Test
+	@Test
 	public void testCSVByLine5() {
 		try{
 
@@ -273,7 +273,7 @@ public class InputLogfileCSVTest {
 	 * The date in each record is >= 2014-02-05
 	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByDate0.output"
 	 */
-	//@Test
+	@Test
 	public void testCSVByDate0() {
 		try{
 
@@ -305,7 +305,7 @@ public class InputLogfileCSVTest {
 	 * The date in each record is <= 2014-02-05
 	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByDate1.output"
 	 */
-	//@Test
+	@Test
 	public void testCSVByDate1() {
 		try{
 
@@ -336,7 +336,7 @@ public class InputLogfileCSVTest {
 	 * The date in each record is >= 2014-02-05
 	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByDate2.output"
 	 */
-	//@Test
+	@Test
 	public void testCSVByDate2() {
 		try{
 
@@ -365,7 +365,7 @@ public class InputLogfileCSVTest {
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByDate3.output"
 	 */
-	//@Test
+	@Test
 	public void testCSVByDate3() {
 		try{
 
@@ -393,7 +393,7 @@ public class InputLogfileCSVTest {
 	 * Expected : A error message println out:  "[Logstat]  : 'start_file_name' parameter must be required  if the 'asc_by_fname' is obmitted !"
 	 * No output generated
 	 */
-	//@Test
+	@Test
 	public void testCSVByDate4() {
 		try{
 
