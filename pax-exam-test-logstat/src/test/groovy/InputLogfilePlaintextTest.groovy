@@ -90,7 +90,7 @@ public class InputLogfilePlaintextTest {
 	/**
 	 * Test for case : full parameters with 'asc_by_fname' = true (logs file in folder sort by ASC)
 	 * Input : Log files in src/test/resources/data_test/testPlainText/*.log
-	 * Expected : output file contains 17 records with format
+	 * Expected : output file contains 18 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByLine0.output"
 	 */
@@ -120,7 +120,7 @@ public class InputLogfilePlaintextTest {
 	/**
 	 * Test for case : missing 'monitor_type' parameter
 	 * Input : Log files in src/test/resources/data_test/testPlainText/*.log
-	 * Expected : output file contains 17 records with format
+	 * Expected : output file contains 18 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByLine1.output"
 	 */
@@ -149,7 +149,7 @@ public class InputLogfilePlaintextTest {
 	/**
 	 * Test for case : missing 'monitor_type','start_file_name' parameters
 	 * Input : Log files in src/test/resources/data_test/testPlainText/*.log
-	 * Expected : output file contains 17 records with format
+	 * Expected : output file contains 18 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * Detail in "src/test/resources/data_test/testPlainText/expected/testPlainTextByLine2.output"
 	 */

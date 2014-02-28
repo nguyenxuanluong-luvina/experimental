@@ -1,6 +1,6 @@
 import java.io.File;
 public class TestUTCommon {
-	public static boolean compareData(String file_path1,String file_path2){
+	public boolean compareData(String file_path1,String file_path2){
 
 		try {
 			println file_path1
@@ -10,6 +10,7 @@ public class TestUTCommon {
 			def file2 = new File(file_path2);
 			def data1 = file1.getText();
 			def data2 = file2.getText();
+
 			if(data1.equals(data2)){
 				println "return true"
 				return true;
@@ -21,7 +22,7 @@ public class TestUTCommon {
 			return false
 		}
 	}
-	public static boolean cleanData(String file_path){
+	public boolean cleanData(String file_path){
 		try{
 			File file = new File(file_path);
 			println file_path
@@ -34,5 +35,15 @@ public class TestUTCommon {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	public int countLines(String file_path){
+		int count = 0 
+		File file = new File(file_path);
+		file.eachLine {
+			if(it != null && it.trim() != ""){
+				count++;
+			}
+		}
+		return count
 	}
 }

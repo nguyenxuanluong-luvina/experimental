@@ -22,7 +22,7 @@ import org.junit.runner.JUnitCore;
 import org.osgi.framework.Bundle;
 import org.osgi.service.cm.ManagedService;
 import service.LogStat;
-
+import TestUTCommon;
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
 public class TestSocket {
@@ -57,6 +57,7 @@ public class TestSocket {
 	BufferedReader br;
 	String line;
 	String result;
+	TestUTCommon test_common = new TestUTCommon();
 	
 	@Before
 	public void prepare() {
@@ -65,7 +66,7 @@ public class TestSocket {
 		filter = new HashMap<String, Object>();
 		conf = new HashMap<String, Object>();
 		output_conf.put("type", "file");
-		output_conf.put("destination", wd + "/output.log");
+		output_conf.put("destination","src/test/resources/data_test/testSocket/output/output.log");
 		result = "";
 		// filter data of log
 		filter = [
@@ -86,7 +87,7 @@ public class TestSocket {
 
 	@After
 	public void finish() {
-		new File(wd + "/output.log").delete();
+		test_common.cleanData("src/test/resources/data_test/testSocket/output/output.log")
 	}
 	
 	/**
@@ -104,7 +105,7 @@ public class TestSocket {
 		
 		svc.runLogStat(conf);
 		// result data
-		result = readFileOutput(wd + "/output.log");
+		result = readFileOutput("src/test/resources/data_test/testSocket/output/output.log");
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
     }
@@ -124,7 +125,7 @@ public class TestSocket {
 
 		svc.runLogStat(conf)
 		// result data
-		result = readFileOutput(wd + "/output.log");
+		result = readFileOutput("src/test/resources/data_test/testSocket/output/output.log");
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
 	}
@@ -136,7 +137,7 @@ public class TestSocket {
 	@Test
 	public void testSocket_03() {
 		input_conf.put("port", 2809);
-		input_conf.put("host", "10.0.1.189");
+		input_conf.put("host", "localhost");
 		
 		conf.put("input",input_conf);
 		conf.put("filter",filter);
@@ -144,7 +145,7 @@ public class TestSocket {
 
 		svc.runLogStat(conf)
 		// result data
-		result = readFileOutput(wd + "/output.log");
+		result = readFileOutput("src/test/resources/data_test/testSocket/output/output.log");
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
 	}
@@ -157,7 +158,7 @@ public class TestSocket {
 	public void testSocket_04() {
 		input_conf.put("port", 2809);
 		input_conf.put("timeout", 15);
-		input_conf.put("host", "10.0.1.189");
+		input_conf.put("host", "localhost");
 		
 		conf.put("input",input_conf);
 		conf.put("filter",filter);
@@ -165,7 +166,7 @@ public class TestSocket {
 
 		svc.runLogStat(conf)
 		// result data
-		result = readFileOutput(wd + "/output.log");
+		result = readFileOutput("src/test/resources/data_test/testSocket/output/output.log");
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
 	}
@@ -183,7 +184,7 @@ public class TestSocket {
 		conf.put("filter",filter);
 		conf.put("output",output_conf);
 		svc.runLogStat(conf)
-		assertFalse((new File(wd + "/output.log")).exists())
+		assertFalse((new File("src/test/resources/data_test/testSocket/output/output.log")).exists())
 		Thread.sleep(3000)
 	}
 	
@@ -201,7 +202,7 @@ public class TestSocket {
 		conf.put("output",output_conf);
 
 		svc.runLogStat(conf)
-		assertFalse((new File(wd + "/output.log")).exists())
+		assertFalse((new File("src/test/resources/data_test/testSocket/output/output.log")).exists())
 		Thread.sleep(3000)
 	}
 	
@@ -220,7 +221,7 @@ public class TestSocket {
 		conf.put("output",output_conf);
 		
 		svc.runLogStat(conf)
-		assertFalse((new File(wd + "/output.log")).exists())
+		assertFalse((new File("src/test/resources/data_test/testSocket/output/output.log")).exists())
 		Thread.sleep(3000)
 	}
 	
@@ -228,10 +229,10 @@ public class TestSocket {
 	 * Check output with value of host is null.
 	 * Expected: return data contains message of log level err.
 	 */
-	//@Test
+	@Test
 	public void testSocket_08() {
 		input_conf.put("port", 2809);
-		input_conf.put("port", 15);
+		input_conf.put("timeout", 15);
 		input_conf.put("host", null);
 		
 		conf.put("input",input_conf);
@@ -240,7 +241,7 @@ public class TestSocket {
 		
 		svc.runLogStat(conf)
 		// result data
-		result = readFileOutput(wd + "/output.log");
+		result = readFileOutput("src/test/resources/data_test/testSocket/output/output.log");
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
 	}

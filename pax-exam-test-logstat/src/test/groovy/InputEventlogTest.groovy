@@ -1,3 +1,5 @@
+import java.sql.Time;
+
 import javax.inject.Inject;
 import static org.junit.Assert.*;
 import static org.ops4j.pax.exam.CoreOptions.*;
@@ -18,6 +20,9 @@ import org.junit.runner.JUnitCore;
 import org.osgi.service.cm.ManagedService;
 import service.LogStat;
 import TestUTCommon;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 /**
  * Testcase for process input from csv file
  * @author nguyenxuanluong
@@ -62,16 +67,17 @@ public class InputEventlogTest {
 	HashMap<String , Object> output_conf = new HashMap<String, Object>();
 	HashMap<String , Object> filter_conf = new HashMap<String, Object>();
 	HashMap<String , Object> conf = new HashMap<String, Object>();
-
+	def from_time_generated = null
 
 	@Before
 	public void prepare() {
 
 		//Generate event-log data for test .this command will be create an eventlog in Application catagory ,the
 		//Log type is ERROR OR WARNING and the description of event
+		from_time_generated = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());		
 		def create_evlog_cmd = 'cmd /c eventcreate /L Application /SO LOGSTAT /ID 1 /T ERROR /D "1-This is an error event of LOGSTAT application" '
 		def create_evlog_cmd2 = 'cmd /c eventcreate /L Application /SO LOGSTAT /ID 2 /T ERROR /D "2-This is another error event of LOGSTAT application"'
-		def create_evlog_cmd3 = 'cmd /c eventcreate /L Application /SO LOGSTAT /ID 3 /T WARNING /D "2-This is a warning event of LOGSTAT application" '
+		def create_evlog_cmd3 = 'cmd /c eventcreate /L Application /SO LOGSTAT /ID 3 /T WARNING /D "3-This is a warning event of LOGSTAT application" '
 		def proc = create_evlog_cmd.execute();
 		proc.waitFor();
 		proc = create_evlog_cmd2.execute();
@@ -116,9 +122,8 @@ public class InputEventlogTest {
 	@Test
 	public void testEventlog0() {
 		try{
-			def from_time_generated = "2014-02-26"
 			input_conf.put("event_log_type","Application");
-			input_conf.put("from_time_generated","from_time_generated");
+			input_conf.put("from_time_generated",from_time_generated.toString());
 			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog0.output")
 			output_conf.put("destination", "src/test/resources/data_test/testEventlog/output/testEventlog0.output");
 			conf.put("input",input_conf);
@@ -126,7 +131,8 @@ public class InputEventlogTest {
 			conf.put("output",output_conf);
 			println "conf " + conf
 			svc.runLogStat(conf)
-			assertFalse(test_common.compareData("src/test/resources/data_test/testEventlog/expected/testEventlog0.output","src/test/resources/data_test/testEventlog/output/testEventlog0.output"))
+			//Check if data return is 3 records logs generated from @prepare step
+			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog0.output") == 3)
 		} catch(Exception ex){
 			println ex
 		}
@@ -135,7 +141,7 @@ public class InputEventlogTest {
 	 * Test for case : Missing 'event_log_type' parameter
 	 * Input : eventlogs generate from @prepare step  
 	 * Expected : output file contains 3 records with format 
-	 * {"source_name"=>"LOGSTAT", "type"=>[event_type], "time"=>[the_time_logs_generated], "message"=>[the_log_message]}
+	 * {"source_name"=>"LOGSTAT", "type"=(>[event_type], "time"=>[the_time_logs_generated], "message"=>[the_log_message]}
 	 *             the event logs store in Application catagory
 	 *             the evemt logs has the time generated >= @from_time_generate params
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog1.output
@@ -143,16 +149,16 @@ public class InputEventlogTest {
 	@Test
 	public void testEventlog1() {
 		try{
-			def from_time_generated = "2014-02-26"
 			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog1.output")
 			output_conf.put("destination", "src/test/resources/data_test/testEventlog/output/testEventlog1.output");
-			input_conf.put("from_time_generated",from_time_generated);
+			input_conf.put("from_time_generated",from_time_generated.toString());
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			println "conf " + conf
 			svc.runLogStat(conf)
-			assertFalse(test_common.compareData("src/test/resources/data_test/testEventlog/expected/testEventlog1.output","src/test/resources/data_test/testEventlog/output/testEventlog1.output"))
+			//Check if data return is 3 records logs generated from @prepare step
+			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog1.output") == 3)
 		} catch(Exception ex){
 			println ex
 		}
@@ -174,14 +180,14 @@ public class InputEventlogTest {
 			conf.put("output",output_conf);
 			println "conf " + conf
 			svc.runLogStat(conf)
-			assertFalse(test_common.compareData("src/test/resources/data_test/testEventlog/expected/testEventlog2.output","src/test/resources/data_test/testEventlog/output/testEventlog2.output"))
+			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog1.output") == 3)
 		} catch(Exception ex){
 			println ex
 		}
 	}
 
 	/**
-	 * Test for case : Missing 'event_log_type' & 'from_time_generated' parameters ,
+	 * Test for case : full parameters ,
 	 * the filter was changed to get only eventlogs has the event source is 'LOGSTAT' and type is 'ERROR'
 	 * Input : eventlogs generate from @prepare step
 	 * Expected : output file contains 2 records with format
@@ -193,6 +199,7 @@ public class InputEventlogTest {
 		try{
 			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog3.output")
 			output_conf.put("destination", "src/test/resources/data_test/testEventlog/output/testEventlog3.output");
+			input_conf.put("from_time_generated",from_time_generated.toString());
 			filter_conf = [
 				filter_type :"",
 				filter_conf :[
@@ -214,7 +221,53 @@ public class InputEventlogTest {
 			conf.put("output",output_conf);
 			println "conf " + conf
 			svc.runLogStat(conf)
-			assertFalse(test_common.compareData("src/test/resources/data_test/testEventlog/expected/testEventlog3.output","src/test/resources/data_test/testEventlog/output/testEventlog3.output"))
+			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog3.output") == 2)
+		} catch(Exception ex){
+			println ex
+		}
+	}
+	/**
+	 * Test for case : full parameters with another eventlog file,
+	 * Input : an eventlog create in "System" log file 
+	 * Expected : output file contains 1 records with format
+	 * {"source_name"=>"LOGSTAT", "type"=>"ERROR", "time"=>[the_time_logs_generated], "message"=>[the_log_message]}
+	 * the output log get from customize event-log file created
+	 * details in \src\test\data_test\testEventlog\expected\testEventlog4.output
+	 */
+	@Test
+	public void testEventlog4() {
+		try{
+			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog4.output")
+			output_conf.put("destination", "src/test/resources/data_test/testEventlog/output/testEventlog4.output");
+			input_conf.put("from_time_generated",from_time_generated.toString());
+			def create_evlog_cmd = 'cmd /c eventcreate /L SYSTEM /SO LOGSTAT2 /ID 3 /T ERROR /D "1-This is a ERROR event in System log file" '
+			def proc = create_evlog_cmd.execute();
+			proc.waitFor();
+			from_time_generated = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
+			input_conf.put("event_log_type","System");		
+			input_conf.put("from_time_generated",from_time_generated.toString());			
+			filter_conf = [
+				filter_type :"",
+				filter_conf :[
+					"data_field" : [
+						"source_name",
+						"type",
+						"time",
+						"message"
+					],
+					"filter" : [
+						"message" : '^(?!\\s*$).+',
+						"source_name" : '(LOGSTAT)',
+						"type" : "(ERROR)"
+					]
+				]
+			]
+			conf.put("input",input_conf);
+			conf.put("filter",filter_conf);
+			conf.put("output",output_conf);
+			println "conf " + conf
+			svc.runLogStat(conf)
+			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog4.output") >= 1)
 		} catch(Exception ex){
 			println ex
 		}
