@@ -1,3 +1,4 @@
+package test.groovy.filter;
 import javax.inject.Inject;
 import static org.junit.Assert.*;
 import static org.ops4j.pax.exam.CoreOptions.*;
@@ -65,7 +66,7 @@ public class TestFilter {
 		conf = new HashMap<String, Object>();
 		result = "";
 		expected = "";
-		logs_test_dir = wd + "/src/test/resources/data_test/testFilter";
+		logs_test_dir = wd + "/src/test/resources/data_test/filter/testFilter";
 		// filter data of log
 		filter = [
 			"filter_type" : "match_field",
@@ -115,7 +116,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testString_01.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testString_01.log")).text
     }
 	
 	/**
@@ -143,7 +144,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testString_02.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testString_02.log")).text
 		assertEquals(expected,result);
 	}
 	
@@ -177,7 +178,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testString_03.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testString_03.log")).text
 		assertEquals(expected,result);
 	}
 	
@@ -211,7 +212,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testString_04.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testString_04.log")).text
 		assertEquals(expected,result);
 	}
 	
@@ -463,7 +464,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testMap_01.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testMap_01.log")).text
 		assertEquals(expected,result);
 	}
 	
@@ -495,7 +496,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testMap_02.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testMap_02.log")).text
 		assertEquals(expected,result);
 	}
 	
@@ -528,7 +529,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testMap_02.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testMap_02.log")).text
 		assertEquals(expected,result);
 	}
 	
@@ -561,7 +562,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testMap_02.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testMap_02.log")).text
 		assertEquals(expected,result);
 	}
 	
@@ -594,7 +595,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testMap_03.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testMap_03.log")).text
 		assertEquals(expected,result);
 	}
 	
@@ -661,7 +662,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testMap_03.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testMap_03.log")).text
 		assertEquals(expected,result);
 	}
 	
@@ -695,7 +696,7 @@ public class TestFilter {
 		// get output data of func
 		result = (new File(wd + "/output.log")).text
 		// get data expected to comparse
-		expected = (new File(wd + "/src/test/resources/data_test/testFilter/expected/expected_testMap_03.log")).text
+		expected = (new File(wd + "/src/test/resources/data_test/filter/testFilter/expected/expected_testMap_03.log")).text
 		assertEquals(expected,result);
 	}
 }

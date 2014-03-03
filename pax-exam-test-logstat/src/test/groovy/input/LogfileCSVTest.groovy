@@ -1,3 +1,4 @@
+package test.groovy.input;
 import javax.inject.Inject;
 import static org.junit.Assert.*;
 import static org.ops4j.pax.exam.CoreOptions.*;
@@ -17,7 +18,7 @@ import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.junit.runner.JUnitCore;
 import org.osgi.service.cm.ManagedService;
 import service.LogStat;
-import TestUTCommon;
+import test.groovy.common.TestUTCommon;
 /**
  * Testcase for process input from csv file 
  * @author nguyenxuanluong
@@ -25,8 +26,8 @@ import TestUTCommon;
  */
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
-public class InputLogfileCSVTest {
-	public InputLogfileCSVTest() {
+public class LogfileCSVTest {
+	public LogfileCSVTest() {
 	}
 
 	@Inject
@@ -67,7 +68,7 @@ public class InputLogfileCSVTest {
 	@Before
 	public void prepare() {
 		currentDir = System.getProperty("user.dir");
-		logs_test_dir = currentDir + "/src/test/resources/data_test/testCSV";
+		logs_test_dir = currentDir + "/src/test/resources/data_test/input/testCSV";
 		svc = context.getService(context.getServiceReference(LogStat.class.getName()));
 		output_conf.put("type", "file");
 
@@ -89,10 +90,10 @@ public class InputLogfileCSVTest {
 
 	/**
 	 * Test for case : full parameters with 'asc_by_fname' = true (logs file in folder sort by ASC)
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : output file contains 19 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
-	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine0.output"
+	 * Detail in "src/test/resources/data_test/input/testCSV/expected/testCSVByLine0.output"
 	 */
 	@Test
 	public void testCSVByLine0() {
@@ -104,14 +105,14 @@ public class InputLogfileCSVTest {
 			input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", true);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByLine0.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByLine0.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine0.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine0.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertTrue(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByLine0.output","src/test/resources/data_test/testCSV/output/testCSVByLine0.output"))
+			assertTrue(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByLine0.output","src/test/resources/data_test/input/testCSV/output/testCSVByLine0.output"))
 		} catch(Exception ex){
 			println ex
 		}
@@ -119,10 +120,10 @@ public class InputLogfileCSVTest {
 
 	/**
 	 * Test for case : missing 'monitor_type' parameter
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : output file contains 19 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
-	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine1.output"
+	 * Detail in "src/test/resources/data_test/input/testCSV/expected/testCSVByLine1.output"
 	 */
 	@Test
 	public void testCSVByLine1() {
@@ -134,24 +135,24 @@ public class InputLogfileCSVTest {
 			input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", true);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByLine1.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByLine1.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine1.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine1.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertTrue(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByLine1.output","src/test/resources/data_test/testCSV/output/testCSVByLine1.output"))
+			assertTrue(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByLine1.output","src/test/resources/data_test/input/testCSV/output/testCSVByLine1.output"))
 		} catch(Exception ex){
 			println ex
 		}
 	}
 	/**
 	 * Test for case : missing 'monitor_type','start_file_name' parameters
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : output file contains 29 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
-	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine2.output"
+	 * Detail in "src/test/resources/data_test/input/testCSV/expected/testCSVByLine2.output"
 	 */
 	@Test
 	public void testCSVByLine2() {
@@ -163,24 +164,24 @@ public class InputLogfileCSVTest {
 			//input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", true);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByLine2.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByLine2.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine2.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine2.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertTrue(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByLine2.output","src/test/resources/data_test/testCSV/output/testCSVByLine2.output"))
+			assertTrue(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByLine2.output","src/test/resources/data_test/input/testCSV/output/testCSVByLine2.output"))
 		} catch(Exception ex){
 			println ex
 		}
 	}
 	/**
 	 * Test for case : missing 'monitor_type','start_file_name' ,'start_pos' parameters
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : output file contains 30 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
-	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine3.output"
+	 * Detail in "src/test/resources/data_test/input/testCSV/expected/testCSVByLine3.output"
 	 */
 	@Test
 	public void testCSVByLine3() {
@@ -192,14 +193,14 @@ public class InputLogfileCSVTest {
 			//input_conf.put("start_file_name", "logfile2.csv");
 			//input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", true);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByLine3.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByLine3.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine3.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine3.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertTrue(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByLine3.output","src/test/resources/data_test/testCSV/output/testCSVByLine3.output"))
+			assertTrue(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByLine3.output","src/test/resources/data_test/input/testCSV/output/testCSVByLine3.output"))
 		} catch(Exception ex){
 			println ex
 		}
@@ -208,7 +209,7 @@ public class InputLogfileCSVTest {
 
 	/**
 	 * Test for case : missing 'monitor_type','start_file_name' ,'start_pos', 'asc_by_fname' parameters
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : A error message println out:  "[Logstat]  : 'start_file_name' parameter must be required !"
 	 * No output generated 
 	 */
@@ -221,14 +222,14 @@ public class InputLogfileCSVTest {
 			//input_conf.put("start_file_name", "logfile2.csv");
 			//input_conf.put("start_pos", 3);
 			//input_conf.put("asc_by_fname", true);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByLine4.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByLine4.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine4.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine4.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertFalse(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByLine4.output","src/test/resources/data_test/testCSV/output/testCSVByLine4.output"))
+			assertFalse(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByLine4.output","src/test/resources/data_test/input/testCSV/output/testCSVByLine4.output"))
 		} catch(Exception ex){
 			println ex
 		}
@@ -236,10 +237,10 @@ public class InputLogfileCSVTest {
 
 	/**
 	 * Test for case : full parameters with 'asc_by_fname' = false (logs file in folder sort by DESC)
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : output file contains 14 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
-	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByLine5.output"
+	 * Detail in "src/test/resources/data_test/input/testCSV/expected/testCSVByLine5.output"
 	 */
 	@Test
 	public void testCSVByLine5() {
@@ -251,14 +252,14 @@ public class InputLogfileCSVTest {
 			input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", false);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByLine5.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByLine5.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine5.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine5.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertTrue(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByLine5.output","src/test/resources/data_test/testCSV/output/testCSVByLine5.output"))
+			assertTrue(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByLine5.output","src/test/resources/data_test/input/testCSV/output/testCSVByLine5.output"))
 		} catch(Exception ex){
 			println ex
 		}
@@ -268,11 +269,11 @@ public class InputLogfileCSVTest {
 
 	/**
 	 * Test for case : full parameters with 'asc_by_fname' = true (logs file in folder sort by ASC)
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : output file contains 16 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * The date in each record is >= 2014-02-05
-	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByDate0.output"
+	 * Detail in "src/test/resources/data_test/input/testCSV/expected/testCSVByDate0.output"
 	 */
 	@Test
 	public void testCSVByDate0() {
@@ -284,14 +285,14 @@ public class InputLogfileCSVTest {
 			input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("from_date", "2014-02-05");
 			input_conf.put("asc_by_fname", true);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByDate0.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByDate0.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate0.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate0.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertTrue(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByDate0.output","src/test/resources/data_test/testCSV/output/testCSVByDate0.output"))
+			assertTrue(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByDate0.output","src/test/resources/data_test/input/testCSV/output/testCSVByDate0.output"))
 		} catch(Exception ex){
 			println ex
 		}
@@ -300,11 +301,11 @@ public class InputLogfileCSVTest {
 
 	/**
 	 * Test for case : full parameters with 'asc_by_fname' = false (logs file in folder sort by ASC)
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : output file contains 16 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * The date in each record is <= 2014-02-05
-	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByDate1.output"
+	 * Detail in "src/test/resources/data_test/input/testCSV/expected/testCSVByDate1.output"
 	 */
 	@Test
 	public void testCSVByDate1() {
@@ -316,14 +317,14 @@ public class InputLogfileCSVTest {
 			input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("from_date", "2014-02-05");
 			input_conf.put("asc_by_fname", false);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByDate1.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByDate1.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate1.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate1.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertTrue(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByDate1.output","src/test/resources/data_test/testCSV/output/testCSVByDate1.output"))
+			assertTrue(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByDate1.output","src/test/resources/data_test/input/testCSV/output/testCSVByDate1.output"))
 		} catch(Exception ex){
 			println ex
 		}
@@ -331,11 +332,11 @@ public class InputLogfileCSVTest {
 
 	/**
 	 * Test for case : missing parameter 'start_file_name'
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : output file contains 16 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
 	 * The date in each record is >= 2014-02-05
-	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByDate2.output"
+	 * Detail in "src/test/resources/data_test/input/testCSV/expected/testCSVByDate2.output"
 	 */
 	@Test
 	public void testCSVByDate2() {
@@ -347,24 +348,24 @@ public class InputLogfileCSVTest {
 			//input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("from_date", "2014-02-05");
 			input_conf.put("asc_by_fname", true);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByDate2.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByDate2.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate2.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate2.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertTrue(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByDate2.output","src/test/resources/data_test/testCSV/output/testCSVByDate2.output"))
+			assertTrue(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByDate2.output","src/test/resources/data_test/input/testCSV/output/testCSVByDate2.output"))
 		} catch(Exception ex){
 			println ex
 		}
 	}
 	/**
 	 * Test for case : missing parameter 'start_file_name' & 'from_date'
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : output file contains 30 records with format
 	 * {"date"=>[the_log_date], "time"=>[the_log_time], "message"=>[full_log_message]}
-	 * Detail in "src/test/resources/data_test/testCSV/expected/testCSVByDate3.output"
+	 * Detail in "src/test/resources/data_test/input/testCSV/expected/testCSVByDate3.output"
 	 */
 	@Test
 	public void testCSVByDate3() {
@@ -376,21 +377,21 @@ public class InputLogfileCSVTest {
 			//input_conf.put("start_file_name", "logfile2.csv");
 			//input_conf.put("from_date", "2014-02-05");
 			input_conf.put("asc_by_fname", true);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByDate3.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByDate3.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate3.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate3.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertTrue(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByDate3.output","src/test/resources/data_test/testCSV/output/testCSVByDate3.output"))
+			assertTrue(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByDate3.output","src/test/resources/data_test/input/testCSV/output/testCSVByDate3.output"))
 		} catch(Exception ex){
 			println ex
 		}
 	}
 	/**
 	 * Test for case : missing parameters : 'start_file_name' ,'from_date',asc_by_fname
-	 * Input : Log filesin src/test/resources/data_test/testCSV/*.csv
+	 * Input : Log filesin src/test/resources/data_test/input/testCSV/*.csv
 	 * Expected : A error message println out:  "[Logstat]  : 'start_file_name' parameter must be required  if the 'asc_by_fname' is obmitted !"
 	 * No output generated
 	 */
@@ -404,14 +405,14 @@ public class InputLogfileCSVTest {
 			//input_conf.put("start_file_name", "logfile2.csv");
 			//input_conf.put("from_date", "2014-02-05");
 			//input_conf.put("asc_by_fname", true);
-			test_common.cleanData("src/test/resources/data_test/testCSV/output/testCSVByDate4.output")
-			output_conf.put("destination", "src/test/resources/data_test/testCSV/output/testCSVByDate4.output");
+			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate4.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate4.output");
 
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			svc.runLogStat(conf)
-			assertFalse(test_common.compareData("src/test/resources/data_test/testCSV/expected/testCSVByDate4.output","src/test/resources/data_test/testCSV/output/testCSVByDate4.output"))
+			assertFalse(test_common.compareData("src/test/resources/data_test/input/testCSV/expected/testCSVByDate4.output","src/test/resources/data_test/input/testCSV/output/testCSVByDate4.output"))
 		} catch(Exception ex){
 			println ex
 		}

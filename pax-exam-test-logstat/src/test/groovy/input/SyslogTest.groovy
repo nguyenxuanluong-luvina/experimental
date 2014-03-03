@@ -1,3 +1,4 @@
+package test.groovy.input;
 import javax.inject.Inject;
 import static org.junit.Assert.*;
 import static org.ops4j.pax.exam.CoreOptions.*;
@@ -22,8 +23,8 @@ import org.jruby.embed.ScriptingContainer;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
-public class TestSyslog {
-    public TestSyslog() {}
+public class SyslogTest {
+    public SyslogTest() {}
 
 	@Inject
 	private org.osgi.framework.BundleContext context;
@@ -79,7 +80,7 @@ public class TestSyslog {
 		// get data of sys log
 		input_conf.put("input_type", "sys_log");
 		// set data for log
-		inputStr = readFileOutput(wd + "/src/test/resources/data_test/testSyslog/messages");
+		inputStr = readFileOutput(wd + "/src/test/resources/data_test/input/testSyslog/messages");
 		FileWriter fw = new FileWriter("/usr/messages")
 		fw.write(inputStr);
 		fw.close();
@@ -103,7 +104,7 @@ public class TestSyslog {
 	 */
     @Test
     public void testSyslog_01() {
-		input_conf.put("path_conf", wd + "/src/test/resources/data_test/testSyslog/logtest01.conf");
+		input_conf.put("path_conf", wd + "/src/test/resources/data_test/input/testSyslog/logtest01.conf");
 		input_conf.put("log_type", "log.test");
 		input_conf.put("from_time_generated", "Feb 26 18:08:33");
 
@@ -114,7 +115,7 @@ public class TestSyslog {
 		svc.runLogStat(conf)
 		// result data
 		result = readFileOutput(wd + "/output.log");
-		expected = readFileOutput(wd + "/src/test/resources/data_test/testSyslog/expected_test01.log");
+		expected = readFileOutput(wd + "/src/test/resources/data_test/input/testSyslog/expected_test01.log");
 		assertEquals(expected, result)
     }
 	
@@ -124,7 +125,7 @@ public class TestSyslog {
 	 */
 	@Test
 	public void testSyslog_02() {
-		input_conf.put("path_conf", wd + "/src/test/resources/data_test/testSyslog/logtest02.conf");
+		input_conf.put("path_conf", wd + "/src/test/resources/data_test/input/testSyslog/logtest02.conf");
 		input_conf.put("log_type", "syslog");
 		input_conf.put("from_time_generated", "Feb 25 12:53:50");
 
@@ -182,7 +183,7 @@ public class TestSyslog {
 	 */
 	@Test
 	public void testSyslog_05() {
-		input_conf.put("path_conf", wd + "/src/test/resources/data_test/testSyslog/logtest01.conf");
+		input_conf.put("path_conf", wd + "/src/test/resources/data_test/input/testSyslog/logtest01.conf");
 		input_conf.put("log_type", null);
 		input_conf.put("from_time_generated", "Feb 25 12:53:50");
 
@@ -202,7 +203,7 @@ public class TestSyslog {
 	 */
 	@Test
 	public void testSyslog_06() {
-		input_conf.put("path_conf", wd + "/src/test/resources/data_test/testSyslog/logtest01.conf");
+		input_conf.put("path_conf", wd + "/src/test/resources/data_test/input/testSyslog/logtest01.conf");
 		input_conf.put("log_type", "type_log_not_exist");
 		input_conf.put("from_time_generated", "Feb 25 12:53:50");
 
@@ -222,7 +223,7 @@ public class TestSyslog {
 	 */
 	@Test
 	public void testSyslog_07() {
-		input_conf.put("path_conf", wd + "/src/test/resources/data_test/testSyslog/logtest01.conf");
+		input_conf.put("path_conf", wd + "/src/test/resources/data_test/input/testSyslog/logtest01.conf");
 		input_conf.put("log_type", "log.test");
 		input_conf.put("from_time_generated", null);
 
@@ -233,7 +234,7 @@ public class TestSyslog {
 		svc.runLogStat(conf)
 		// result data
 		result = readFileOutput(wd + "/output.log");
-		expected = readFileOutput(wd + "/src/test/resources/data_test/testSyslog/expected_test02.log");
+		expected = readFileOutput(wd + "/src/test/resources/data_test/input/testSyslog/expected_test02.log");
 		assertEquals(expected, result)
 	}
 	

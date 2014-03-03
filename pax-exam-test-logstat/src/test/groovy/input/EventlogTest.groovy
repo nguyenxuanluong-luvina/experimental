@@ -1,3 +1,4 @@
+package test.groovy.input;
 import java.sql.Time;
 
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.junit.runner.JUnitCore;
 import org.osgi.service.cm.ManagedService;
 import service.LogStat;
-import TestUTCommon;
+import test.groovy.TestUTCommon;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -30,8 +31,8 @@ import java.text.SimpleDateFormat;
  */
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
-public class InputEventlogTest {
-	public InputEventlogTest() {
+public class EventlogTest {
+	public EventlogTest() {
 	}
 
 	@Inject
@@ -86,7 +87,7 @@ public class InputEventlogTest {
 		proc.waitFor();
 
 		currentDir = System.getProperty("user.dir");
-		logs_test_dir = currentDir + "/src/test/resources/data_test/testEventlog";
+		logs_test_dir = currentDir + "/src/test/resources/data_test/input/testEventlog";
 		svc = context.getService(context.getServiceReference(LogStat.class.getName()));
 		output_conf.put("type", "file");
 		filter_conf = [
@@ -124,15 +125,15 @@ public class InputEventlogTest {
 		try{
 			input_conf.put("event_log_type","Application");
 			input_conf.put("from_time_generated",from_time_generated.toString());
-			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog0.output")
-			output_conf.put("destination", "src/test/resources/data_test/testEventlog/output/testEventlog0.output");
+			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog0.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog0.output");
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			println "conf " + conf
 			svc.runLogStat(conf)
 			//Check if data return is 3 records logs generated from @prepare step
-			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog0.output") == 3)
+			assertTrue(test_common.countLines("src/test/resources/data_test/input/testEventlog/output/testEventlog0.output") == 3)
 		} catch(Exception ex){
 			println ex
 		}
@@ -149,8 +150,8 @@ public class InputEventlogTest {
 	@Test
 	public void testEventlog1() {
 		try{
-			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog1.output")
-			output_conf.put("destination", "src/test/resources/data_test/testEventlog/output/testEventlog1.output");
+			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog1.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog1.output");
 			input_conf.put("from_time_generated",from_time_generated.toString());
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
@@ -158,7 +159,7 @@ public class InputEventlogTest {
 			println "conf " + conf
 			svc.runLogStat(conf)
 			//Check if data return is 3 records logs generated from @prepare step
-			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog1.output") == 3)
+			assertTrue(test_common.countLines("src/test/resources/data_test/input/testEventlog/output/testEventlog1.output") == 3)
 		} catch(Exception ex){
 			println ex
 		}
@@ -173,14 +174,14 @@ public class InputEventlogTest {
 	@Test
 	public void testEventlog2() {
 		try{
-			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog2.output")
-			output_conf.put("destination", "src/test/resources/data_test/testEventlog/output/testEventlog2.output");
+			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog2.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog2.output");
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
 			println "conf " + conf
 			svc.runLogStat(conf)
-			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog1.output") == 3)
+			assertTrue(test_common.countLines("src/test/resources/data_test/input/testEventlog/output/testEventlog1.output") == 3)
 		} catch(Exception ex){
 			println ex
 		}
@@ -197,8 +198,8 @@ public class InputEventlogTest {
 	@Test
 	public void testEventlog3() {
 		try{
-			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog3.output")
-			output_conf.put("destination", "src/test/resources/data_test/testEventlog/output/testEventlog3.output");
+			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog3.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog3.output");
 			input_conf.put("from_time_generated",from_time_generated.toString());
 			filter_conf = [
 				filter_type :"",
@@ -221,7 +222,7 @@ public class InputEventlogTest {
 			conf.put("output",output_conf);
 			println "conf " + conf
 			svc.runLogStat(conf)
-			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog3.output") == 2)
+			assertTrue(test_common.countLines("src/test/resources/data_test/input/testEventlog/output/testEventlog3.output") == 2)
 		} catch(Exception ex){
 			println ex
 		}
@@ -237,8 +238,8 @@ public class InputEventlogTest {
 	@Test
 	public void testEventlog4() {
 		try{
-			test_common.cleanData("src/test/resources/data_test/testEventlog/output/testEventlog4.output")
-			output_conf.put("destination", "src/test/resources/data_test/testEventlog/output/testEventlog4.output");
+			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog4.output")
+			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog4.output");
 			input_conf.put("from_time_generated",from_time_generated.toString());
 			def create_evlog_cmd = 'cmd /c eventcreate /L SYSTEM /SO LOGSTAT2 /ID 3 /T ERROR /D "1-This is a ERROR event in System log file" '
 			def proc = create_evlog_cmd.execute();
@@ -267,7 +268,7 @@ public class InputEventlogTest {
 			conf.put("output",output_conf);
 			println "conf " + conf
 			svc.runLogStat(conf)
-			assertTrue(test_common.countLines("src/test/resources/data_test/testEventlog/output/testEventlog4.output") >= 1)
+			assertTrue(test_common.countLines("src/test/resources/data_test/input/testEventlog/output/testEventlog4.output") >= 1)
 		} catch(Exception ex){
 			println ex
 		}

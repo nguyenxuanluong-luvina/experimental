@@ -1,6 +1,0 @@
-{"source_name"=>"LOGSTAT", "type"=>"WARNING", "time"=>"20140227135122.000000+420", "message"=>"3-This is a warning event of LOGSTAT application\r\n"}
-{"source_name"=>"LOGSTAT", "type"=>"ERROR", "time"=>"20140227135121.000000+420", "message"=>"2-This is another error event of LOGSTAT application\r\n"}
-{"source_name"=>"LOGSTAT", "type"=>"ERROR", "time"=>"20140227135120.000000+420", "message"=>"1-This is an error event of LOGSTAT application \r\n"}
-{"source_name"=>"LOGSTAT", "type"=>"WARNING", "time"=>"20140227135022.000000+420", "message"=>"3-This is a warning event of LOGSTAT application\r\n"}
-{"source_name"=>"LOGSTAT", "type"=>"ERROR", "time"=>"20140227135021.000000+420", "message"=>"2-This is another error event of LOGSTAT application\r\n"}
-{"source_name"=>"LOGSTAT", "type"=>"ERROR", "time"=>"20140227135021.000000+420", "message"=>"1-This is an error event of LOGSTAT application \r\n"}
