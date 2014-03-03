@@ -55,6 +55,11 @@ public class Log4jTest {
 	String line;
 	String result;
 	TestUTCommon test_common = new TestUTCommon();
+	/**
+	 * Note :  Run this project src\test\resources\data_test\input\testLog4j\Log4jEx (A log4j server to send
+	 * logs to logstat via socket) before testing   
+	 */
+	
 	@Before
 	public void prepare() {
 		input_conf = new HashMap<String, Object>();
