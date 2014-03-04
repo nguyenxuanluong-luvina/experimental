@@ -2,7 +2,7 @@ package test.groovy.input;
 import javax.inject.Inject;
 import static org.junit.Assert.*;
 import static org.ops4j.pax.exam.CoreOptions.*;
- 
+
 import org.junit.Test;
 import org.junit.After;
 import org.junit.Before;
@@ -24,28 +24,29 @@ import org.jruby.embed.ScriptingContainer;
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
 public class SyslogTest {
-    public SyslogTest() {}
+	public SyslogTest() {
+	}
 
 	@Inject
 	private org.osgi.framework.BundleContext context;
 	String wd = System.getProperty("user.dir");
-    @Configuration
-    public Option[] config() {
-        return options(
-			cleanCaches(true),
-			frameworkStartLevel(6),
-			// felix log level
-			systemProperty("felix.log.level").value("4"), // 4 = DEBUG
-			// setup properties for fileinstall bundle.
-			systemProperty("felix.home").value(wd),
-			// Pax-exam make this test code into OSGi bundle at runtime, so 
-			// we need "groovy-all" bundle to use this groovy test code.
-            mavenBundle("org.codehaus.groovy", "groovy-all", "2.2.1").startLevel(2),
-			mavenBundle("org.jruby", "jruby-complete", "1.7.10").startLevel(2),
-			mavenBundle("org.wiperdog", "logstat", "1.0").startLevel(3),
-            junitBundles()
+	@Configuration
+	public Option[] config() {
+		return options(
+		cleanCaches(true),
+		frameworkStartLevel(6),
+		// felix log level
+		systemProperty("felix.log.level").value("4"), // 4 = DEBUG
+		// setup properties for fileinstall bundle.
+		systemProperty("felix.home").value(wd),
+		// Pax-exam make this test code into OSGi bundle at runtime, so
+		// we need "groovy-all" bundle to use this groovy test code.
+		mavenBundle("org.codehaus.groovy", "groovy-all", "2.2.1").startLevel(2),
+		mavenBundle("org.jruby", "jruby-complete", "1.7.10").startLevel(2),
+		mavenBundle("org.wiperdog", "logstat", "1.0").startLevel(3),
+		junitBundles()
 		);
-    }
+	}
 
 	private LogStat svc;
 	HashMap<String , Object> input_conf;
@@ -57,7 +58,7 @@ public class SyslogTest {
 	String result;
 	String expected;
 	String inputStr;
-	
+
 	@Before
 	public void prepare() {
 		input_conf = new HashMap<String, Object>();
@@ -66,6 +67,8 @@ public class SyslogTest {
 		conf = new HashMap<String, Object>();
 		output_conf.put("type", "file");
 		output_conf.put("destination", wd + "/output.log");
+		def outFile = [path: wd + "/output.log"]
+		output_conf.put("config", outFile);
 		result = "";
 		expected = "";
 		inputStr = "";
@@ -84,7 +87,7 @@ public class SyslogTest {
 		FileWriter fw = new FileWriter("/usr/messages")
 		fw.write(inputStr);
 		fw.close();
-		
+
 		try {
 			svc = context.getService(context.getServiceReference(LogStat.class.getName()));
 		} catch (Exception e) {
@@ -97,13 +100,13 @@ public class SyslogTest {
 		new File(wd + "/output.log").delete();
 		new File("/usr/messages").delete();
 	}
-	
+
 	/**
 	 * Check func with all of variable is path_conf, log_type, from_time_generated.
 	 * Expected: return data with datetime more than datetime of config for test
 	 */
-    @Test
-    public void testSyslog_01() {
+	@Test
+	public void testSyslog_01() {
 		input_conf.put("path_conf", wd + "/src/test/resources/data_test/input/testSyslog/logtest01.conf");
 		input_conf.put("log_type", "log.test");
 		input_conf.put("from_time_generated", "Feb 26 18:08:33");
@@ -117,8 +120,8 @@ public class SyslogTest {
 		result = readFileOutput(wd + "/output.log");
 		expected = readFileOutput(wd + "/src/test/resources/data_test/input/testSyslog/expected_test01.log");
 		assertEquals(expected, result)
-    }
-	
+	}
+
 	/**
 	 * Check func with data of file corresponding to path_conf is empty.
 	 * Expected: return data is empty
@@ -138,7 +141,7 @@ public class SyslogTest {
 		result = readFileOutput(wd + "/output.log");
 		assertTrue(result.length() == 0)
 	}
-	
+
 	/**
 	 * Check func with value of path_conf is null.
 	 * Expected: return data is empty
@@ -158,7 +161,7 @@ public class SyslogTest {
 		result = readFileOutput(wd + "/output.log");
 		assertTrue(result.length() == 0)
 	}
-	
+
 	/**
 	 * Check func with value of path_conf does not exist.
 	 * Expected: not return data
@@ -176,7 +179,7 @@ public class SyslogTest {
 		svc.runLogStat(conf)
 		assertFalse(new File(wd + "/output.log").exists())
 	}
-	
+
 	/**
 	 * Check func with value of log_type is null.
 	 * Expected: return data is empty
@@ -196,7 +199,7 @@ public class SyslogTest {
 		result = readFileOutput(wd + "/output.log");
 		assertTrue(result.length() == 0)
 	}
-	
+
 	/**
 	 * Check func with value of log_type does not exist.
 	 * Expected: return data is empty
@@ -216,7 +219,7 @@ public class SyslogTest {
 		result = readFileOutput(wd + "/output.log");
 		assertTrue(result.length() == 0)
 	}
-	
+
 	/**
 	 * Check func with value of from_time_generated is null.
 	 * Expected: return all data in log
@@ -237,7 +240,7 @@ public class SyslogTest {
 		expected = readFileOutput(wd + "/src/test/resources/data_test/input/testSyslog/expected_test02.log");
 		assertEquals(expected, result)
 	}
-	
+
 	/**
 	 * Check func with format of from_time_generated incorrect format of datetime.
 	 * Expected: not return data
@@ -253,7 +256,7 @@ public class SyslogTest {
 		svc.runLogStat(conf)
 		assertFalse(new File(wd + "/output.log").exists())
 	}
-	
+
 	/**
 	 * @param filePath
 	 *            path to file contains data output for test

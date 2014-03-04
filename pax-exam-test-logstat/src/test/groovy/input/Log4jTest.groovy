@@ -59,7 +59,7 @@ public class Log4jTest {
 	 * Note :  Run this project src\test\resources\data_test\input\testLog4j\Log4jEx (A log4j server to send
 	 * logs to logstat via socket) before testing   
 	 */
-	
+
 	@Before
 	public void prepare() {
 		input_conf = new HashMap<String, Object>();
@@ -67,7 +67,8 @@ public class Log4jTest {
 		filter = new HashMap<String, Object>();
 		conf = new HashMap<String, Object>();
 		output_conf.put("type", "file");
-		output_conf.put("destination","src/test/resources/data_test/input/testLog4j/output/output.log");
+		def outFile = [path:"src/test/resources/data_test/input/testCSV/output/output.log"]
+		output_conf.put("config", outFile);
 		result = "";
 		// filter data of log
 		filter = [
@@ -80,12 +81,12 @@ public class Log4jTest {
 		input_conf.put("input_type", "log4j");
 		try {
 			svc = context.getService(context.getServiceReference(LogStat.class.getName()));
-//			def cmd_run_log4j = ' cmd /c cd "src/test/resources/data_test/Log4jEx/src/com/java" & javac -cp .;log4j-1.2.14.jar Log4jSocketAppenderExample.java '
-//			def proc = cmd_run_log4j.execute();
-//			proc.waitFor();
-//			//cmd_run_log4j = 'start cmd /c cd "src/test/resources/data_test/Log4jEx/src/com/java" & cmd /c java -cp .;log4j-1.2.14.jar Log4jSocketAppenderExample '
-//			cmd_run_log4j = 'cmd /c java -cp  .;src/test/resources/data_test/Log4jEx/src/com/java;log4j-1.2.14.jar;. Log4jSocketAppenderExample '
-//			proc = cmd_run_log4j.execute();
+			//			def cmd_run_log4j = ' cmd /c cd "src/test/resources/data_test/Log4jEx/src/com/java" & javac -cp .;log4j-1.2.14.jar Log4jSocketAppenderExample.java '
+			//			def proc = cmd_run_log4j.execute();
+			//			proc.waitFor();
+			//			//cmd_run_log4j = 'start cmd /c cd "src/test/resources/data_test/Log4jEx/src/com/java" & cmd /c java -cp .;log4j-1.2.14.jar Log4jSocketAppenderExample '
+			//			cmd_run_log4j = 'cmd /c java -cp  .;src/test/resources/data_test/Log4jEx/src/com/java;log4j-1.2.14.jar;. Log4jSocketAppenderExample '
+			//			proc = cmd_run_log4j.execute();
 
 		} catch (Exception e) {
 			e.printStackTrace()
@@ -145,7 +146,7 @@ public class Log4jTest {
 	public void testLog4j_03() {
 		input_conf.put("port", 2808);
 		input_conf.put("host", "localhost");
-		input_conf.put("timeout", 15);		
+		input_conf.put("timeout", 15);
 		conf.put("input",input_conf);
 		conf.put("filter",filter);
 		conf.put("output",output_conf);

@@ -71,8 +71,6 @@ public class LogfileCSVTest {
 		logs_test_dir = currentDir + "/src/test/resources/data_test/input/testCSV";
 		svc = context.getService(context.getServiceReference(LogStat.class.getName()));
 		output_conf.put("type", "file");
-
-
 		filter_conf = [
 			"filter_type" : "match_field",
 			"filter_conf" : [
@@ -100,14 +98,13 @@ public class LogfileCSVTest {
 		try{
 
 			input_conf.put("path", logs_test_dir);
-			input_conf.put("file_format", "csv");
 			input_conf.put("monitor_type", "line");
 			input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", true);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine0.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine0.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByLine0.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -131,13 +128,13 @@ public class LogfileCSVTest {
 
 			input_conf.put("path", logs_test_dir);
 			input_conf.put("file_format", "csv");
-			//input_conf.put("monitor_type", "line");
+			input_conf.put("monitor_type", "line");
 			input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", true);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine1.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine1.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByLine1.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -165,8 +162,8 @@ public class LogfileCSVTest {
 			input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", true);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine2.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine2.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByLine2.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -194,8 +191,8 @@ public class LogfileCSVTest {
 			//input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", true);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine3.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine3.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByLine3.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -223,8 +220,8 @@ public class LogfileCSVTest {
 			//input_conf.put("start_pos", 3);
 			//input_conf.put("asc_by_fname", true);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine4.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine4.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByLine4.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -253,8 +250,8 @@ public class LogfileCSVTest {
 			input_conf.put("start_pos", 3);
 			input_conf.put("asc_by_fname", false);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByLine5.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByLine5.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByLine5.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -280,14 +277,14 @@ public class LogfileCSVTest {
 		try{
 
 			input_conf.put("path", logs_test_dir);
-			input_conf.put("file_format", "csv");
-			input_conf.put("monitor_type", "date");
+			//input_conf.put("file_format", "csv");
+			//input_conf.put("monitor_type", "date");
 			input_conf.put("start_file_name", "logfile2.csv");
 			input_conf.put("from_date", "2014-02-05");
 			input_conf.put("asc_by_fname", true);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate0.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate0.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByDate0.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -318,8 +315,8 @@ public class LogfileCSVTest {
 			input_conf.put("from_date", "2014-02-05");
 			input_conf.put("asc_by_fname", false);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate1.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate1.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByDate1.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -349,8 +346,8 @@ public class LogfileCSVTest {
 			input_conf.put("from_date", "2014-02-05");
 			input_conf.put("asc_by_fname", true);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate2.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate2.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByDate2.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -378,8 +375,8 @@ public class LogfileCSVTest {
 			//input_conf.put("from_date", "2014-02-05");
 			input_conf.put("asc_by_fname", true);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate3.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate3.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByDate3.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -406,8 +403,8 @@ public class LogfileCSVTest {
 			//input_conf.put("from_date", "2014-02-05");
 			//input_conf.put("asc_by_fname", true);
 			test_common.cleanData("src/test/resources/data_test/input/testCSV/output/testCSVByDate4.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testCSV/output/testCSVByDate4.output");
-
+			def outFile = [path:"src/test/resources/data_test/input/testCSV/output/testCSVByDate4.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);

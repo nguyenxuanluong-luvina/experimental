@@ -126,7 +126,8 @@ public class EventlogTest {
 			input_conf.put("event_log_type","Application");
 			input_conf.put("from_time_generated",from_time_generated.toString());
 			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog0.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog0.output");
+			def outFile = [path:"src/test/resources/data_test/input/testEventlog/output/testEventlog0.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -147,11 +148,12 @@ public class EventlogTest {
 	 *             the evemt logs has the time generated >= @from_time_generate params
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog1.output
 	 */
-	@Test
+	//@Test
 	public void testEventlog1() {
 		try{
 			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog1.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog1.output");
+			def outFile = [path:"src/test/resources/data_test/input/testEventlog/output/testEventlog1.output"]
+			output_conf.put("config", outFile);
 			input_conf.put("from_time_generated",from_time_generated.toString());
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
@@ -171,11 +173,12 @@ public class EventlogTest {
 	 * {"source_name"=>"LOGSTAT", "type"=>[event_type], "time"=>[the_time_logs_generated], "message"=>[the_log_message]}
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog2.output
 	 */
-	@Test
+	//@Test
 	public void testEventlog2() {
 		try{
 			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog2.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog2.output");
+			def outFile = [path:"src/test/resources/data_test/input/testEventlog/output/testEventlog2.output"]
+			output_conf.put("config", outFile);
 			conf.put("input",input_conf);
 			conf.put("filter",filter_conf);
 			conf.put("output",output_conf);
@@ -195,11 +198,12 @@ public class EventlogTest {
 	 * {"source_name"=>"LOGSTAT", "type"=>"ERROR", "time"=>[the_time_logs_generated], "message"=>[the_log_message]}
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog3.output
 	 */
-	@Test
+	//@Test
 	public void testEventlog3() {
 		try{
 			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog3.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog3.output");
+			def outFile = [path:"src/test/resources/data_test/input/testEventlog/output/testEventlog3.output"]
+			output_conf.put("config", outFile);
 			input_conf.put("from_time_generated",from_time_generated.toString());
 			filter_conf = [
 				filter_type :"",
@@ -235,11 +239,12 @@ public class EventlogTest {
 	 * the output log get from customize event-log file created
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog4.output
 	 */
-	@Test
+	//@Test
 	public void testEventlog4() {
 		try{
 			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog4.output")
-			output_conf.put("destination", "src/test/resources/data_test/input/testEventlog/output/testEventlog4.output");
+			def outFile = [path:"src/test/resources/data_test/input/testEventlog/output/testEventlog4.output"]
+			output_conf.put("config", outFile);
 			input_conf.put("from_time_generated",from_time_generated.toString());
 			def create_evlog_cmd = 'cmd /c eventcreate /L SYSTEM /SO LOGSTAT2 /ID 3 /T ERROR /D "1-This is a ERROR event in System log file" '
 			def proc = create_evlog_cmd.execute();
