@@ -110,6 +110,7 @@ public class EventlogTest {
 
 	@After
 	public void finish() {
+				
 	}
 	/**
 	 * Test for case : full parameters
@@ -120,7 +121,7 @@ public class EventlogTest {
 	 *            the evemt logs has the time generated >= @from_time_generate params	 *            
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog0.output
 	 */
-	@Test
+	//@Test
 	public void testEventlog0() {
 		try{
 			input_conf.put("event_log_type","Application");
@@ -148,7 +149,7 @@ public class EventlogTest {
 	 *             the evemt logs has the time generated >= @from_time_generate params
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog1.output
 	 */
-	@Test
+	//@Test
 	public void testEventlog1() {
 		try{
 			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog1.output")
@@ -173,7 +174,7 @@ public class EventlogTest {
 	 * {"source_name"=>"LOGSTAT", "type"=>[event_type], "time"=>[the_time_logs_generated], "message"=>[the_log_message]}
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog2.output
 	 */
-	@Test
+	//@Test
 	public void testEventlog2() {
 		try{
 			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog2.output")
@@ -239,7 +240,7 @@ public class EventlogTest {
 	 * the output log get from customize event-log file created
 	 * details in \src\test\data_test\testEventlog\expected\testEventlog4.output
 	 */
-	@Test
+	//@Test
 	public void testEventlog4() {
 		try{
 			test_common.cleanData("src/test/resources/data_test/input/testEventlog/output/testEventlog4.output")

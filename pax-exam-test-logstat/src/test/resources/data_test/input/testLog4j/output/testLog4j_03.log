@@ -1,0 +1,6 @@
+{"message"=>"Log4j error message!!", "path"=>"com.java.Log4jSocketAppenderExample", "priority"=>"ERROR", "logger_name"=>"com.java.Log4jSocketAppenderExample", "thread"=>"main", "time"=>"2014-03-06 10:39:35"}
+{"message"=>"Log4j error message!!", "path"=>"com.java.Log4jSocketAppenderExample", "priority"=>"ERROR", "logger_name"=>"com.java.Log4jSocketAppenderExample", "thread"=>"main", "time"=>"2014-03-06 10:39:38"}
+{"message"=>"Log4j error message!!", "path"=>"com.java.Log4jSocketAppenderExample", "priority"=>"ERROR", "logger_name"=>"com.java.Log4jSocketAppenderExample", "thread"=>"main", "time"=>"2014-03-06 10:39:41"}
+{"message"=>"Log4j error message!!", "path"=>"com.java.Log4jSocketAppenderExample", "priority"=>"ERROR", "logger_name"=>"com.java.Log4jSocketAppenderExample", "thread"=>"main", "time"=>"2014-03-06 10:39:44"}
+{"message"=>"Log4j error message!!", "path"=>"com.java.Log4jSocketAppenderExample", "priority"=>"ERROR", "logger_name"=>"com.java.Log4jSocketAppenderExample", "thread"=>"main", "time"=>"2014-03-06 10:39:47"}
+{"message"=>"Log4j error message!!", "path"=>"com.java.Log4jSocketAppenderExample", "priority"=>"ERROR", "logger_name"=>"com.java.Log4jSocketAppenderExample", "thread"=>"main", "time"=>"2014-03-06 10:39:50"}
