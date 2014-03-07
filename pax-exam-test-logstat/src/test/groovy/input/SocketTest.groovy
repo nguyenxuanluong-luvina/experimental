@@ -62,6 +62,8 @@ public class SocketTest {
 	TestUTCommon test_common = new TestUTCommon();
 	
 	/**
+	 * Run this file : \src\test\resources\data_test\input\testSocket\test_socket.rb before test by commandline
+	 *   ruby pax-exam-sample-logstat\src\test\resources\data_test\input\testSocket\test_socket.rb
 	 * 
 	 */
 	@Before
@@ -101,6 +103,7 @@ public class SocketTest {
 	@Test
 	public void testSocket_01() {
 		input_conf.put("port", 2809);
+		input_conf.put("timeout", 15);
 		def outFile = ["path":"src/test/resources/data_test/input/testSocket/output/testSocket_01.log"]
 		output_conf.put("config", outFile)
 		test_common.cleanData("src/test/resources/data_test/input/testSocket/output/testSocket_01.log")
@@ -111,6 +114,7 @@ public class SocketTest {
 		svc.runLogStat(conf);
 		// result data
 		result = readFileOutput("src/test/resources/data_test/input/testSocket/output/testSocket_01.log");
+		assertNotNull(result)
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
 	}
@@ -133,6 +137,7 @@ public class SocketTest {
 		svc.runLogStat(conf)
 		// result data
 		result = readFileOutput("src/test/resources/data_test/input/testSocket/output/testSocket_02.log");
+		assertNotNull(result)
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
 	}
@@ -156,6 +161,7 @@ public class SocketTest {
 		svc.runLogStat(conf)
 		// result data
 		result = readFileOutput("src/test/resources/data_test/input/testSocket/output/testSocket_03.log");
+		assertNotNull(result)
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
 	}
@@ -180,6 +186,7 @@ public class SocketTest {
 		svc.runLogStat(conf)
 		// result data
 		result = readFileOutput("src/test/resources/data_test/input/testSocket/output/testSocket_04.log");
+		assertNotNull(result)
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
 	}
@@ -200,6 +207,7 @@ public class SocketTest {
 		conf.put("filter",filter);
 		conf.put("output",output_conf);
 		svc.runLogStat(conf)
+		
 		assertFalse((new File("src/test/resources/data_test/input/testSocket/output/testSocket_05.log")).exists())
 		Thread.sleep(3000)
 	}
@@ -267,6 +275,7 @@ public class SocketTest {
 		svc.runLogStat(conf)
 		// result data
 		result = readFileOutput("src/test/resources/data_test/input/testSocket/output/testSocket_08.log");
+		assertNotNull(result)
 		assertTrue(result.contains('[Socket] : This is a log message from socket !'))
 		Thread.sleep(3000)
 	}
@@ -290,9 +299,10 @@ public class SocketTest {
 				}
 			}
 			return output;
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			throw ex;
+		} catch (Exception ex) {
+//			ex.printStackTrace();
+//			throw ex;
+			System.out.println("No data output !");
 		}
 	}
 }
