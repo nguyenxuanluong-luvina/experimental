@@ -22,7 +22,7 @@ import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.junit.runner.JUnitCore;
 import org.osgi.framework.Bundle;
 import org.osgi.service.cm.ManagedService;
-import service.LogStat;
+import org.wiperdog.logstat.service.LogStat;
 import test.groovy.common.TestUTCommon;
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
@@ -46,7 +46,7 @@ public class SocketTest {
 		// we need "groovy-all" bundle to use this groovy test code.
 		mavenBundle("org.codehaus.groovy", "groovy-all", "2.2.1").startLevel(2),
 		mavenBundle("org.jruby", "jruby-complete", "1.7.10").startLevel(2),
-		mavenBundle("org.wiperdog", "logstat", "1.0").startLevel(3),
+		mavenBundle("org.wiperdog", "org.wiperdog.logstat", "1.0").startLevel(3),
 		junitBundles()
 		);
 	}
